@@ -1,0 +1,9 @@
+Instalar YunoHost](www.yunohost.org) con el servicio de DNS dinámicas de [Porkbun](www.porkbun.com)
+https://github.com/porkbundomains/porkbun-dynamic-dns-python
+
+Descarga la imagen de YunoHost desde [su servidor](https://yunohost.org/ru/install/hardware), la montas en nuestra tarjeta microSD siguiendo las instrucciones según tu sistema operativo. 
+
+Si deseas hacer uso del wifi, debes habilitarlo mediante la adición del archivo wpa_supplicant.conf (Si estás en Windows, habilita que se muestren las extensiones de archivo para comprobar que no acaba realmente en .txt) en el directorio raiz de tu tarjeta
+
+
+lo insertas en tu Raspberry y arrancas. ¡Ya ha comenzado la magia!
