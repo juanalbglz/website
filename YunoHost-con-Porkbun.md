@@ -1,5 +1,4 @@
-## Instalar YunoHost](www.yunohost.org) con el servicio de DNS dinámicas de [Porkbun](www.porkbun.com)
-https://github.com/porkbundomains/porkbun-dynamic-dns-python
+## Instalar YunoHost](https://www.yunohost.org) con el [servicio de DNS dinámicas](https://github.com/porkbundomains/porkbun-dynamic-dns-python) de [Porkbun](https://www.porkbun.com)
 
 Descarga la imagen de YunoHost desde [su servidor](https://yunohost.org/ru/install/hardware), la montas en nuestra tarjeta microSD siguiendo las instrucciones según tu sistema operativo. 
 
