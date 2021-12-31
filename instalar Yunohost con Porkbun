@@ -3,7 +3,40 @@ https://github.com/porkbundomains/porkbun-dynamic-dns-python
 
 Descarga la imagen de YunoHost desde [su servidor](https://yunohost.org/ru/install/hardware), la montas en nuestra tarjeta microSD siguiendo las instrucciones según tu sistema operativo. 
 
-Si deseas hacer uso del wifi, debes habilitarlo mediante la adición del archivo wpa_supplicant.conf (Si estás en Windows, habilita que se muestren las extensiones de archivo para comprobar que no acaba realmente en .txt) en el directorio raiz de tu tarjeta
+Si deseas conectar la máquina por WiFi en vez de cableado debes habilitarlo mediante la adición del archivo wpa_supplicant.conf (Si estás en Windows, habilita que se muestren las extensiones de archivo para comprobar que no acaba realmente en .txt) en el directorio raiz de tu tarjeta que contenga la siguiente información
 
 
-lo insertas en tu Raspberry y arrancas. ¡Ya ha comenzado la magia!
+```
+country=es
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="NOMBREWIFI"
+    psk="CONTRASEÑAWIFI"
+}
+```
+
+Donde country es el código del país [según el standard ISO 3166-1 Alpha-2](https://www.iso.org/obp/ui/#search), [ssid el nombre de tu wifi, y psk su contraseña] (http://192.168.1.1/wifi5g.html)
+
+Expulsas la unidad, la insertas en tu Raspberry y arrancas.
+
+¡Ya ha comenzado la magia!
+Una vez que la luz de verde de la Raspberry se apague, puedes comprobar en el [mapa de la red en el router](http://192.168.1.1/networkmap.html), la ip de la instalación de YunoHost, y si no, en una ventana de comando (cmd) ejecuta la orden
+```
+ping yunohost -4
+```
+la opción -4 fuerza el uso de ipv4 sobre ipv6 (parece que ahora ya viene por defecto en el comando ping)
+
+Ahora que sabes la ip, o bien te diriges a la interfaz web de tu [yunohost.local](https://yunohost.local) o te conectas via ssh (consola de comandos) (con [Putty](www.putty.org), por ejemplo si estás en Windows) a la ip resultante del ping con el usuario root (root@XXX.XXX.XXX.XXX) o a root@yunohost.local en el puerto 22. Acepta la llave de seguridad del servidor ssh y conectate con la clave "yunohost".
+
+### Opcional: Fijar la IP en el router
+Si quieres no tener que estar buscando la ip de tu máquina puedes asignarle una IP fija dentro de tu red local. Para ello dirígete al router, opciones avanzadas, Advanced Seup, LAN, y añade a la lista de direcciones IP estáticas la dirección mac de tu dispositivo. (tu direcciçón MAC la puedes ver mediante el comando
+```
+ip link show wlan0
+```
+en la consola ssh
+) No olvides darle a aplicar en la configuración del router y reiniciar la raspberry con el comando 
+```
+shutdown -r
+```
