@@ -40,3 +40,53 @@ en la consola ssh
 ```
 shutdown -r
 ```
+Una vez reiniciada la Raspberry debería encontrarse en la IP que le acabas de asignar.
+
+
+### Usar la API de [Porkbun](www.porkbun.com)
+Como cliente de Porkbun se agradece la [API para configurar las DNS dinámicamente](https://github.com/porkbundomains/porkbun-dynamic-dns-python), aunque se echa de menos que esta no esté estandarizada para que pueda ser compatible con [lexicon](https://github.com/AnalogJ/lexicon), y autodetectada y configurada desde el propio YunoHost.
+
+Las instrucciones son sencillas:
+Primero deberíamos actualizar la lista de paquetes y las aplicaciones de nuestra máquina YunoHost mediante el comando en la consola ssh
+```
+sudo apt update
+sudo apt full-upgrade
+```
+Si recibes unos comentarios de que han cambiado los repositorios y de que debes aceptarlo manualmente, es porque la version de debian que se usa ya no es la última, pero el full-upgrade lo soluciona.
+
+Pasamos a la instalación del cliente de la API de Porkbun
+ejecutas en la consola ssh de YunoHost
+
+```
+pip install requests
+git clone https://github.com/porkbundomains/porkbun-dynamic-dns-python.git
+cd porkbun-dynamic-dns-python/
+sudo nano config.json.example
+```
+
+Ahora necesitas la clave API de Porkbun. Para ello vas a la página web de [Porkbun](www.porkbun.com), entras en tu cuenta, arriba en el menu "ACCOUNT" vas a "[API Access](https://porkbun.com/account/api)" y creas una nueva clave despues de darle un alias haciendo clic en el botón "Create API Key". Copia bien estos datos, ya que la clave "Secret Key" no se volverá a mostrar.
+
+Añadimos los datos en la consola ssh copiándolos y pegándolos (clic derecho del ratón en la consola ssh aunque puede que te borre la linea en la que pegues).
+Guardamos el documento con "Ctrl+X", "Y" para confirmar, y editas el nombre de archivo para quitar el .example y dejarlo como config.json, y confirmas con "Y".
+
+Ahora, en el [gestor de dominios de Porkbun](https://porkbun.com/account/domainsSpeedy), debes habilitar la API ("API ACCESS") para el dominio que quieres usar en YunoHost.
+Ejecutamos el script en la consola ssh del servidor YunoHost mediante
+
+```
+mv porkbun-dynamic-dns-python/ /usr/bin/
+cd /usr/bin/porkbun-dynamic-dns-python
+python porkbun-ddns.py config.json tudominio.com '*'
+```
+
+Ahora deberíamos programarlo para ejecutarlo al menos a cada reinicio. Para ello vamos a añadirlo a crontab. En la consola ssh de YunoHost escribe:
+```
+crontab -e
+```
+
+Elije tu editor preferido (el más fácil es nano) y añade al final del documento la línea:
+```
+@reboot python /usr/bin/porkbun-dynamic-dns-python/porkbun-ddns.py /usr/bin/porkbun-dynamic-dns-python/config.json tudominio.com '*'
+0 */2 * * *  python /usr/bin/porkbun-dynamic-dns-python/porkbun-ddns.py /usr/bin/porkbun-dynamic-dns-python/config.json tudominio.com '*'
+```
+Guarda con la combinación "Ctrl+X" y acepta con "Y"
+La primera línea ejecuta el script al reinicio y la segunda cada dos horas, por si acaso cambia de IP tu conexión.
