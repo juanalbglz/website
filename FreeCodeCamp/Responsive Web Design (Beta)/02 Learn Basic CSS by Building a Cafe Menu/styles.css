@@ -4,9 +4,16 @@ body{
     font-family: sans-serif;
 }
 
+.established {
+    font-style: italic;
+  }
+  
 h1, h2, p {
     text-align: center;
   }
+h1, h2 {
+    font-family: Impact, serif;
+}
 
 .menu{
     width: 80%;
