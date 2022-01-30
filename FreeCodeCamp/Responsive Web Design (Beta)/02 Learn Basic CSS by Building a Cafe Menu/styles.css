@@ -32,6 +32,12 @@ h2 {
     padding: 20px;
 }
 
+hr {
+  height: 3px;
+  background-color: brown;
+  border-color: brown;
+}
+
 .flavor, .dessert {
     text-align: left;
     width:75%;
