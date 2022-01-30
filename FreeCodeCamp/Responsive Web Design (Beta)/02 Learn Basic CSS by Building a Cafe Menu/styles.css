@@ -12,16 +12,18 @@ h1, h2, p {
     background-color: burlywood;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-.flavor {
+.flavor, .dessert {
     text-align: left;
-    width:50%;
+    width:75%;
   }
 
 .price {
     text-align: right;
-    width:50%;
+    width:25%;
   }
 
 .item p {
