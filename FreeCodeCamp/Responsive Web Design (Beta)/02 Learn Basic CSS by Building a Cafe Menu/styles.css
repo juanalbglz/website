@@ -4,7 +4,7 @@ body{
 h1, h2, p {
     text-align: center;
   }
-div{
+.menu{
     width: 80%;
     background-color: burlywood;
     margin-left: auto;
