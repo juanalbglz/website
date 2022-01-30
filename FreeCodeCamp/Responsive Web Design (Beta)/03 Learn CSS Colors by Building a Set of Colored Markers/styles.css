@@ -13,6 +13,21 @@ h1 {
   margin: 10px auto;
 }
 
+.cap {
+  width: 60px;
+  height: 25px;
+}
+
+.sleeve {
+  width: 110px;
+  height: 25px;
+  background-color: rgb(255, 255, 255, 0.5);
+}
+
+cap, sleeve {
+  display: inline-block;
+}
+
 .red {
   background: linear-gradient(rgb(122, 74, 14), rgb(245, 62, 113), rgb(162, 27, 27));
 }
