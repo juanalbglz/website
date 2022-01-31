@@ -15,11 +15,14 @@
         <label>Create a New Password: <input type="password" pattern="[a-z0-5]{8,}" required /></label>
       </fieldset>
       <fieldset>
-        <label><input type="radio"></label>
-        <label><input type="radio"></label>
-        <label></label>
+        <label><input type="radio" name="account-type"/> Personal Account</label>
+        <label><input type="radio" name="account-type"/> Business Account</label>
+        <label><input type="checkbox" required /> I accept the <a href="https://www.freecodecamp.org/news/terms-of-service/">terms and conditions</a></label>
       </fieldset>
-      <fieldset></fieldset>
+      <fieldset>
+        <label>Upload a profile picture: <input type="file" /></label>
+        <label>Input your age (years): <input type="number" min=13 max=120></label>
+      </fieldset>
       <input type="submit" value="Submit">
   </body>
 </html>
