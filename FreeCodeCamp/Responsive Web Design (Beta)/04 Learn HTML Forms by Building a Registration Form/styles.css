@@ -58,4 +58,14 @@ textarea {
 input[type="submit"] {
   display: block;
   width: 60%;
+  min-width: 300px;
+  margin: 1em auto;
+  height: 2em;
+  font-size: 1.1rem;
+  background-color: #3b3b4f;
+  border-color: white;
+}
+
+input[type="file"] {
+  padding: 1px 2px;
 }
